@@ -1,0 +1,28 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    {% include 'main/part/navbar.html' %}
+
+    <div class="container-fluid bt-2">
+        <div class="row">
+            <div class="col-6">
+                <div class="card- card-body">
+                    <img src="{{p.file.url}}" alt="" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-6 pt-5">
+                <div class="card-card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">Добавил: {{p.user.first_name}}</li>
+                        <li class="list-group-item">Номер: {{p.user.last_name}}</li>
+                        <li class="list-group-item">Название: {{p.title}}</li>
+                        <li class="list-group-item">Цена: {{p.price}}</li>
+                        <li class="list-group-item">Описание: {{p.description}}</li>
+                        <li class="list-group-item">Дата создания: {{p.date_create}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

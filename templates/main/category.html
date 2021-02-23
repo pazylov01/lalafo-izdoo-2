@@ -1,0 +1,39 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    {% include 'main/part/navbar.html' %}
+
+    <div class="container-fluid bt-2">
+        <div class="row">
+            <div class="col-9">
+                <div class="card- card-body">
+                    <div class="row">
+                        {% for p in products %}
+                        <div class="col-3 mb-2">
+                            <div class="card card-body" style="height: 400px;">
+                                <a href="">
+                                    <img src="{{p.file.url}}" style="height: 200px; width: 100%;object-fit: contain;" alt="">
+                                </a>
+                                <a href=""><h3>{{p.title}}</h3></a>
+                                <h5 class="text-success">{{p.price}} сом</h5>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card-card-body">
+                    <h1>Категории</h1>
+                    <ul class="list-group">
+                        <a href="{% url 'index' %}" class="list-group-item">Все категории</a>
+                        {% for c in categories %}
+                        <a href="{% url 'category' c.id %}" class="list-group-item {% if active == c.id %} active {% endif %}">{{c.title}}</a>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

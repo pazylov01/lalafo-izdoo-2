@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="{% url 'index' %}">IZDOO</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" 
+          {% if request.user.is_authenticated %} href="{% url 'lk' %}"
+          {% else %} href="#modal" data-toggle="modal" 
+          {% endif %}
+          >Личный кабинет</a>
+        </li>
+      </ul>
+      <form action="{% url 'search' %}" method="GET" class="ml-auto form-inline my-2 my-lg-0">
+        <input name="search" class="form-control mr-sm-2" type="search" placeholder="Введите название" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0 mr-5" type="submit">Поиск</button>
+      </form>
+    </div>
+  </nav>
+
+
+
+
+
+
+  <div id="modal" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Вход в личный кабинет</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="{% url 'login' %}" method="POST">
+          {% csrf_token %}
+        <div class="modal-body">
+            Логин:
+            <input type="text" name="username" class="form-control">
+            Пароль:
+            <input type="text" name="password" class="form-control">
+        </div>
+      
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+          <button type="submit" class="btn btn-primary">Войти</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>

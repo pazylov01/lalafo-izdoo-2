@@ -1,0 +1,69 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <nav class="navbar-expand-sm navbar-dark bg-dark">
+        <div class="container">
+            <a href="{% url 'index' %}" class="navbar-brand">IZDOO</a>
+            <button class="navbar-toggler" data-target="#nav" data-toggle="collapse" >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="nav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="{% url 'logout' %}" class="nav-link">Выйти</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <div class="col-6">
+                <div class="card card-body">
+                    <table class="table-striped">
+                        <tr>
+                            <th>Дата</th>
+                            <th>Название</th>
+                            <th>Цена</th>
+                            <th></th>
+                        </tr>
+                        {% for p in personal.product_set.all %}
+                        <tr>
+                            <td>{{p.date_create}}</td>
+                            <td>{{p.title}}</td>
+                            <td>{{p.price}}</td>
+                            <td>
+                                <button class="btn btn-warning btn-sm">Изменить</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card card-body">
+                    <form action="{% url 'productadd' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        Категория
+                        <select name="category" class="form-control">
+                            {% for c in categories %}
+                            <option value="{{c.id}}">{{c.title}}</option>
+                            {% endfor %}
+                        </select>
+                        Название
+                        <input required name="title" type="text" class="form-control">
+                        Цена
+                        <input required name="price" type="number" class="form-control">
+                        Описание
+                        <textarea required name="description" class="form-control" rows="5"></textarea>
+                        Изображение
+                        <input required name="file" type="file" class="form-control">
+                        <hr>
+                        <button class="btn btn-success btn-block">Добавить</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
